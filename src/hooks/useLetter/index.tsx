@@ -12,6 +12,8 @@ type LetterContextType = {
   setLetters: Dispatch<SetStateAction<string[]>>
   missingLetters: string[]
   setMissingLetters: Dispatch<SetStateAction<string[]>>
+  lastFinishedRow: number
+  setLastFinishedRow: Dispatch<SetStateAction<number>>
 }
 
 type LetterContextProviderProps = {
@@ -29,10 +31,18 @@ for (let i = 0; i < 30; i++) {
 const LetterContextProvider = ({ children }: LetterContextProviderProps) => {
   const [letters, setLetters] = useState<string[]>([])
   const [missingLetters, setMissingLetters] = useState(initialMissingLetters)
+  const [lastFinishedRow, setLastFinishedRow] = useState(0)
 
   return (
     <LetterContext.Provider
-      value={{ letters, setLetters, missingLetters, setMissingLetters }}
+      value={{
+        letters,
+        setLetters,
+        missingLetters,
+        setMissingLetters,
+        lastFinishedRow,
+        setLastFinishedRow,
+      }}
     >
       {children}
     </LetterContext.Provider>
