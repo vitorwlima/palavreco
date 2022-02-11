@@ -10,36 +10,36 @@ const Keyboard = () => {
         <KeyboardEnter />
       </div>
       <div className="flex gap-3">
-        <KeyboardLetter letter="Q" />
-        <KeyboardLetter letter="W" />
-        <KeyboardLetter letter="E" />
-        <KeyboardLetter letter="R" />
-        <KeyboardLetter letter="T" />
-        <KeyboardLetter letter="Y" />
-        <KeyboardLetter letter="U" />
-        <KeyboardLetter letter="I" />
-        <KeyboardLetter letter="O" />
-        <KeyboardLetter letter="P" />
+        <KeyboardLetter letter="q" />
+        <KeyboardLetter letter="w" />
+        <KeyboardLetter letter="e" />
+        <KeyboardLetter letter="r" />
+        <KeyboardLetter letter="t" />
+        <KeyboardLetter letter="y" />
+        <KeyboardLetter letter="u" />
+        <KeyboardLetter letter="i" />
+        <KeyboardLetter letter="o" />
+        <KeyboardLetter letter="p" />
       </div>
       <div className="flex gap-3">
-        <KeyboardLetter letter="A" />
-        <KeyboardLetter letter="S" />
-        <KeyboardLetter letter="D" />
-        <KeyboardLetter letter="F" />
-        <KeyboardLetter letter="G" />
-        <KeyboardLetter letter="H" />
-        <KeyboardLetter letter="J" />
-        <KeyboardLetter letter="K" />
-        <KeyboardLetter letter="L" />
+        <KeyboardLetter letter="a" />
+        <KeyboardLetter letter="s" />
+        <KeyboardLetter letter="d" />
+        <KeyboardLetter letter="f" />
+        <KeyboardLetter letter="g" />
+        <KeyboardLetter letter="h" />
+        <KeyboardLetter letter="j" />
+        <KeyboardLetter letter="k" />
+        <KeyboardLetter letter="l" />
       </div>
       <div className="flex gap-3">
-        <KeyboardLetter letter="Z" />
-        <KeyboardLetter letter="X" />
-        <KeyboardLetter letter="C" />
-        <KeyboardLetter letter="V" />
-        <KeyboardLetter letter="B" />
-        <KeyboardLetter letter="N" />
-        <KeyboardLetter letter="M" />
+        <KeyboardLetter letter="z" />
+        <KeyboardLetter letter="x" />
+        <KeyboardLetter letter="c" />
+        <KeyboardLetter letter="v" />
+        <KeyboardLetter letter="b" />
+        <KeyboardLetter letter="n" />
+        <KeyboardLetter letter="m" />
       </div>
     </div>
   )

@@ -1,10 +1,35 @@
 import { useLetter } from 'src/hooks/useLetter'
+import { LetterStatusType } from 'src/types'
 
 const KeyboardEnter = () => {
-  const { letters, lastFinishedRow, setLastFinishedRow } = useLetter()
+  const { gameWord, letters, setLetters, lastFinishedRow, setLastFinishedRow } =
+    useLetter()
+
+  const getStatusByLetter = (
+    letter: string,
+    index: number
+  ): LetterStatusType => {
+    const letterPosition = index % 5
+
+    if (gameWord[letterPosition] === letter) {
+      return 'correct'
+    }
+
+    if (gameWord.includes(letter)) {
+      return 'existent'
+    }
+
+    return 'inexistent'
+  }
 
   const handleFinishCurrentRow = () => {
     setLastFinishedRow((previousFinishedRow) => previousFinishedRow + 1)
+    setLetters((previousLetters) =>
+      previousLetters.map((letter, index) => ({
+        value: letter.value,
+        status: getStatusByLetter(letter.value, index),
+      }))
+    )
   }
 
   const allowed =

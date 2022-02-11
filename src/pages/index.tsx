@@ -12,7 +12,10 @@ const Home = () => {
           <GridLetterSquare letter={letter} key={i} />
         ))}
         {missingLetters.map((letter, i) => (
-          <GridLetterSquare letter={letter} key={i} />
+          <GridLetterSquare
+            letter={{ value: letter, status: 'neutral' }}
+            key={i}
+          />
         ))}
       </div>
       <Keyboard />

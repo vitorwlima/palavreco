@@ -9,7 +9,10 @@ const KeyboardLetter = ({ letter }: KeyboardProps) => {
     useLetter()
 
   const handleAddNewLetter = (letter: string) => {
-    setLetters((previousLetters) => [...previousLetters, letter])
+    setLetters((previousLetters) => [
+      ...previousLetters,
+      { value: letter, status: 'neutral' },
+    ])
     setMissingLetters((previousMissingLetters) =>
       previousMissingLetters.filter((_, index) => index !== 0)
     )
@@ -19,7 +22,7 @@ const KeyboardLetter = ({ letter }: KeyboardProps) => {
 
   return (
     <button
-      className={`${bg} grid h-12 w-12 place-items-center rounded-md text-2xl font-bold hover:brightness-75 disabled:cursor-not-allowed`}
+      className={`${bg} grid h-12 w-12 place-items-center rounded-md text-2xl font-bold uppercase hover:brightness-75 disabled:cursor-not-allowed`}
       onClick={() => handleAddNewLetter(letter)}
       disabled={
         letters.length !== 0 &&

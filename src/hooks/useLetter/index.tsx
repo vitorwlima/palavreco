@@ -7,13 +7,19 @@ import {
   useState,
 } from 'react'
 
+import { usableWords } from 'src/constants'
+import { getRandomIntegerFrom } from 'src/utils'
+import { LetterType, LetterStatusType } from 'src/types'
+
 type LetterContextType = {
-  letters: string[]
-  setLetters: Dispatch<SetStateAction<string[]>>
+  letters: LetterType[]
+  setLetters: Dispatch<SetStateAction<LetterType[]>>
   missingLetters: string[]
   setMissingLetters: Dispatch<SetStateAction<string[]>>
   lastFinishedRow: number
   setLastFinishedRow: Dispatch<SetStateAction<number>>
+  gameWord: string
+  getBackgroundByStatus: (status: LetterStatusType) => string
 }
 
 type LetterContextProviderProps = {
@@ -28,8 +34,19 @@ for (let i = 0; i < 30; i++) {
   initialMissingLetters.push('')
 }
 
+const gameWordIndex = getRandomIntegerFrom(0, usableWords.length)
+const gameWord = usableWords[gameWordIndex]
+
+const getBackgroundByStatus = (status: LetterStatusType): string =>
+  ({
+    neutral: 'backdrop-brightness-90',
+    correct: 'bg-green-500',
+    existent: 'bg-yellow-600',
+    inexistent: 'bg-slate-800',
+  }[status])
+
 const LetterContextProvider = ({ children }: LetterContextProviderProps) => {
-  const [letters, setLetters] = useState<string[]>([])
+  const [letters, setLetters] = useState<LetterType[]>([])
   const [missingLetters, setMissingLetters] = useState(initialMissingLetters)
   const [lastFinishedRow, setLastFinishedRow] = useState(0)
 
@@ -42,6 +59,8 @@ const LetterContextProvider = ({ children }: LetterContextProviderProps) => {
         setMissingLetters,
         lastFinishedRow,
         setLastFinishedRow,
+        gameWord,
+        getBackgroundByStatus,
       }}
     >
       {children}
