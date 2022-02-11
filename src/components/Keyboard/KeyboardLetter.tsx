@@ -1,9 +1,19 @@
+import { useLetter } from 'src/hooks/useLetter'
+
 type KeyboardProps = {
   content: string
-  handleAddNewLetter: (letter: string) => void
 }
 
-const KeyboardLetter = ({ content, handleAddNewLetter }: KeyboardProps) => {
+const KeyboardLetter = ({ content }: KeyboardProps) => {
+  const { setLetters, setMissingLetters } = useLetter()
+
+  const handleAddNewLetter = (letter: string) => {
+    setLetters((previousLetters) => [...previousLetters, letter])
+    setMissingLetters((previousMissingLetters) =>
+      previousMissingLetters.filter((_, index) => index !== 0)
+    )
+  }
+
   const isSingleLetter = content.length === 1
   const bg = 'backdrop-brightness-75'
   const width = isSingleLetter ? 'w-12' : 'w-40'

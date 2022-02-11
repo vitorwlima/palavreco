@@ -1,25 +1,8 @@
-import { useState } from 'react'
-
 import { GridLetterSquare, Keyboard } from 'src/components'
-
-const initialMissingLetters: string[] = []
-
-for (let i = 0; i < 30; i++) {
-  initialMissingLetters.push('')
-}
+import { useLetter } from 'src/hooks/useLetter'
 
 const Home = () => {
-  const [letters, setLetters] = useState<string[]>([])
-  const [missingLetters, setMissingLetters] = useState<string[]>(
-    initialMissingLetters
-  )
-
-  const handleAddNewLetter = (letter: string) => {
-    setLetters((previousLetters) => [...previousLetters, letter])
-    setMissingLetters((previousMissingLetters) =>
-      previousMissingLetters.filter((_, index) => index !== 0)
-    )
-  }
+  const { letters, missingLetters } = useLetter()
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-cyan-900 p-4 text-white">
@@ -32,7 +15,7 @@ const Home = () => {
           <GridLetterSquare letter={letter} key={i} />
         ))}
       </div>
-      <Keyboard handleAddNewLetter={handleAddNewLetter} />
+      <Keyboard />
     </main>
   )
 }
