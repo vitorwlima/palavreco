@@ -34,7 +34,7 @@ for (let i = 0; i < 30; i++) {
   initialMissingLetters.push('')
 }
 
-const gameWordIndex = getRandomIntegerFrom(0, usableWords.length)
+const gameWordIndex = getRandomIntegerFrom(0, usableWords.length - 1)
 const gameWord = usableWords[gameWordIndex]
 
 const getBackgroundByStatus = (status: LetterStatusType): string =>
