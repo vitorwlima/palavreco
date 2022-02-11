@@ -1,12 +1,18 @@
-import { LetterType } from 'src/types'
-import { useLetter } from 'src/hooks/useLetter'
+import { LetterType, LetterStatusType } from 'src/types'
 
 type GridLetterSquareProps = {
   letter: LetterType
 }
 
 const GridLetterSquare = ({ letter }: GridLetterSquareProps) => {
-  const { getBackgroundByStatus } = useLetter()
+  const getBackgroundByStatus = (status: LetterStatusType): string =>
+    ({
+      neutral: 'backdrop-brightness-90',
+      correct: 'bg-green-500',
+      existent: 'bg-yellow-600',
+      inexistent: 'bg-slate-800',
+    }[status])
+
   const bg = getBackgroundByStatus(letter.status)
 
   return (

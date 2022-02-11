@@ -9,7 +9,7 @@ import {
 
 import { usableWords } from 'src/constants'
 import { getRandomIntegerFrom } from 'src/utils'
-import { LetterType, LetterStatusType } from 'src/types'
+import { LetterType } from 'src/types'
 
 type LetterContextType = {
   letters: LetterType[]
@@ -19,7 +19,6 @@ type LetterContextType = {
   lastFinishedRow: number
   setLastFinishedRow: Dispatch<SetStateAction<number>>
   gameWord: string
-  getBackgroundByStatus: (status: LetterStatusType) => string
 }
 
 type LetterContextProviderProps = {
@@ -37,14 +36,6 @@ for (let i = 0; i < 30; i++) {
 const gameWordIndex = getRandomIntegerFrom(0, usableWords.length - 1)
 const gameWord = usableWords[gameWordIndex]
 
-const getBackgroundByStatus = (status: LetterStatusType): string =>
-  ({
-    neutral: 'backdrop-brightness-90',
-    correct: 'bg-green-500',
-    existent: 'bg-yellow-600',
-    inexistent: 'bg-slate-800',
-  }[status])
-
 const LetterContextProvider = ({ children }: LetterContextProviderProps) => {
   const [letters, setLetters] = useState<LetterType[]>([])
   const [missingLetters, setMissingLetters] = useState(initialMissingLetters)
@@ -60,7 +51,6 @@ const LetterContextProvider = ({ children }: LetterContextProviderProps) => {
         lastFinishedRow,
         setLastFinishedRow,
         gameWord,
-        getBackgroundByStatus,
       }}
     >
       {children}
