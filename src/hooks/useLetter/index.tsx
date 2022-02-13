@@ -21,6 +21,8 @@ type LetterContextType = {
   gameWord: string
   gameStatus: GameStatusType
   setNewGameStatus: (text: string) => void
+  isGameOver: boolean
+  setIsGameOver: Dispatch<SetStateAction<boolean>>
 }
 
 type LetterContextProviderProps = {
@@ -42,6 +44,7 @@ const LetterContextProvider = ({ children }: LetterContextProviderProps) => {
   const [letters, setLetters] = useState<LetterType[]>([])
   const [missingLetters, setMissingLetters] = useState(initialMissingLetters)
   const [lastFinishedRow, setLastFinishedRow] = useState(0)
+  const [isGameOver, setIsGameOver] = useState(false)
   const [gameStatus, setGameStatus] = useState<GameStatusType>({
     text: 'inicial',
     show: false,
@@ -64,6 +67,8 @@ const LetterContextProvider = ({ children }: LetterContextProviderProps) => {
         gameWord: 'falta',
         gameStatus,
         setNewGameStatus,
+        isGameOver,
+        setIsGameOver,
       }}
     >
       {children}

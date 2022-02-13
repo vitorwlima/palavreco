@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useLetter } from 'src/hooks/useLetter'
 import { LetterType, LetterStatusType } from 'src/types'
 import { allWords } from '../../constants'
@@ -10,10 +11,17 @@ const KeyboardEnter = () => {
     lastFinishedRow,
     setLastFinishedRow,
     setNewGameStatus,
+    setIsGameOver,
   } = useLetter()
 
+  const [correctLetters, setCorrectLetters] = useState(0)
+  const [lettersUsed, setLettersUsed] = useState(0)
+
   const getStatusByLetter = (letter: LetterType): LetterStatusType => {
+    setLettersUsed((prev) => prev + 1)
+
     if (gameWord[letter.position] === letter.value) {
+      setCorrectLetters((prev) => prev + 1)
       return 'correct'
     }
 
@@ -72,6 +80,7 @@ const KeyboardEnter = () => {
       return setNewGameStatus('Palavra inexistente')
     }
 
+    setCorrectLetters(0)
     setLastFinishedRow((previousFinishedRow) => previousFinishedRow + 1)
     setLetters((previousLetters) => [
       ...previousLetters.slice(0, lastFinishedRow * 5),
@@ -83,6 +92,18 @@ const KeyboardEnter = () => {
         })),
     ])
   }
+
+  useEffect(() => {
+    if (correctLetters === 10) {
+      setIsGameOver(true)
+      setNewGameStatus('Parabéns!')
+    }
+
+    if (lettersUsed === 60) {
+      setIsGameOver(true)
+      setNewGameStatus('Você perdeu!')
+    }
+  }, [correctLetters, lettersUsed])
 
   const allowed =
     letters.length !== 0 &&

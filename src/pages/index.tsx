@@ -2,7 +2,7 @@ import { GridLetterSquare, Keyboard, GameStatus } from 'src/components'
 import { useLetter } from 'src/hooks/useLetter'
 
 const Home = () => {
-  const { letters, missingLetters } = useLetter()
+  const { letters, missingLetters, isGameOver } = useLetter()
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-cyan-900 p-4 text-white">
@@ -19,6 +19,16 @@ const Home = () => {
               key={i}
             />
           ))}
+        </div>
+        <div className="flex h-8 w-full items-center justify-center">
+          {isGameOver && (
+            <button
+              className="text-l1 w-full rounded-md bg-cyan-700 p-2"
+              onClick={() => window.location.reload()}
+            >
+              Jogar novamente
+            </button>
+          )}
         </div>
       </section>
       <Keyboard />

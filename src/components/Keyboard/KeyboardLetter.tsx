@@ -6,8 +6,13 @@ type KeyboardProps = {
 }
 
 const KeyboardLetter = ({ letter }: KeyboardProps) => {
-  const { letters, setLetters, setMissingLetters, lastFinishedRow } =
-    useLetter()
+  const {
+    letters,
+    setLetters,
+    setMissingLetters,
+    lastFinishedRow,
+    isGameOver,
+  } = useLetter()
 
   const handleAddNewLetter = (letter: string) => {
     setLetters((previousLetters) => [
@@ -61,9 +66,10 @@ const KeyboardLetter = ({ letter }: KeyboardProps) => {
       className={`${bg} grid h-12 w-12 place-items-center rounded-md text-2xl font-bold uppercase hover:brightness-75 disabled:cursor-not-allowed`}
       onClick={() => handleAddNewLetter(letter)}
       disabled={
-        letters.length !== 0 &&
-        letters.length % 5 === 0 &&
-        letters.length / 5 !== lastFinishedRow
+        isGameOver ||
+        (letters.length !== 0 &&
+          letters.length % 5 === 0 &&
+          letters.length / 5 !== lastFinishedRow)
       }
     >
       {letter}
