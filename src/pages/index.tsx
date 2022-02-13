@@ -13,7 +13,7 @@ const Home = () => {
         ))}
         {missingLetters.map((letter, i) => (
           <GridLetterSquare
-            letter={{ value: letter, status: 'neutral' }}
+            letter={{ value: letter, status: 'neutral', position: i % 5 }}
             key={i}
           />
         ))}

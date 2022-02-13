@@ -1,33 +1,61 @@
 import { useLetter } from 'src/hooks/useLetter'
-import { LetterStatusType } from 'src/types'
+import { LetterType, LetterStatusType } from 'src/types'
 
 const KeyboardEnter = () => {
   const { gameWord, letters, setLetters, lastFinishedRow, setLastFinishedRow } =
     useLetter()
 
-  const getStatusByLetter = (
-    letter: string,
-    index: number
-  ): LetterStatusType => {
-    const letterPosition = index % 5
-
-    if (gameWord[letterPosition] === letter) {
+  const getStatusByLetter = (letter: LetterType): LetterStatusType => {
+    if (gameWord[letter.position] === letter.value) {
       return 'correct'
     }
 
-    if (gameWord.includes(letter)) {
+    if (!gameWord.includes(letter.value)) {
+      return 'inexistent'
+    }
+
+    const userWordLetterOccurrences = letters.filter(
+      (currentLetter) => currentLetter.value === letter.value
+    )
+    const gameWordLetterOccurrences = gameWord
+      .split('')
+      .filter((currentLetter) => currentLetter === letter.value)
+
+    const userWordLetterOccurrencesLength = userWordLetterOccurrences.length
+    const gameWordLetterOccurrencesLength = gameWordLetterOccurrences.length
+
+    if (userWordLetterOccurrencesLength === gameWordLetterOccurrencesLength) {
       return 'existent'
     }
 
-    return 'inexistent'
+    if (userWordLetterOccurrencesLength > gameWordLetterOccurrencesLength) {
+      const correctOccurrences = userWordLetterOccurrences.filter(
+        (item) => gameWord[item.position] === item.value
+      )
+      const letterShouldExist = userWordLetterOccurrences
+        .filter((item) => gameWord[item.position] !== item.value)
+        .filter(
+          (_, index) =>
+            index < gameWordLetterOccurrencesLength - correctOccurrences.length
+        )
+        .filter((item) => item.position === letter.position)
+
+      if (letterShouldExist.length) {
+        return 'existent'
+      }
+
+      return 'inexistent'
+    }
+
+    return 'existent'
   }
 
   const handleFinishCurrentRow = () => {
     setLastFinishedRow((previousFinishedRow) => previousFinishedRow + 1)
     setLetters((previousLetters) =>
-      previousLetters.map((letter, index) => ({
-        value: letter.value,
-        status: getStatusByLetter(letter.value, index),
+      previousLetters.map((letter) => ({
+        ...letter,
+        status: getStatusByLetter(letter),
       }))
     )
   }

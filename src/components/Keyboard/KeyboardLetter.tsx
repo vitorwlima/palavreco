@@ -11,7 +11,11 @@ const KeyboardLetter = ({ letter }: KeyboardProps) => {
   const handleAddNewLetter = (letter: string) => {
     setLetters((previousLetters) => [
       ...previousLetters,
-      { value: letter, status: 'neutral' },
+      {
+        value: letter,
+        status: 'neutral',
+        position: previousLetters.length % 5,
+      },
     ])
     setMissingLetters((previousMissingLetters) =>
       previousMissingLetters.filter((_, index) => index !== 0)

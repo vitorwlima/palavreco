@@ -50,7 +50,7 @@ const LetterContextProvider = ({ children }: LetterContextProviderProps) => {
         setMissingLetters,
         lastFinishedRow,
         setLastFinishedRow,
-        gameWord,
+        gameWord: 'falta',
       }}
     >
       {children}
