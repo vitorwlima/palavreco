@@ -73,7 +73,7 @@ const KeyboardEnter = () => {
 
   return (
     <button
-      className="grid h-12 w-40 place-items-center rounded-md text-2xl font-bold backdrop-brightness-75 hover:brightness-75 disabled:cursor-not-allowed"
+      className="grid h-12 w-40 place-items-center rounded-md text-2xl font-bold backdrop-brightness-90 hover:brightness-75 disabled:cursor-not-allowed"
       onClick={handleFinishCurrentRow}
       disabled={!allowed}
     >

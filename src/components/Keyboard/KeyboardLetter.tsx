@@ -1,4 +1,5 @@
 import { useLetter } from 'src/hooks/useLetter'
+import { LetterStatusType } from 'src/types'
 
 type KeyboardProps = {
   letter: string
@@ -22,7 +23,38 @@ const KeyboardLetter = ({ letter }: KeyboardProps) => {
     )
   }
 
-  const bg = 'backdrop-brightness-75'
+  const getLetterStatus = (): LetterStatusType => {
+    const statusQuantity = {
+      correct: 0,
+      existent: 0,
+      inexistent: 0,
+      neutral: 0,
+    }
+
+    letters.forEach((currentLetter) => {
+      if (currentLetter.value !== letter) {
+        return
+      }
+
+      statusQuantity[currentLetter.status] =
+        statusQuantity[currentLetter.status] + 1
+    })
+
+    if (statusQuantity.correct > 0) return 'correct'
+    if (statusQuantity.existent > 0) return 'existent'
+    if (statusQuantity.inexistent > 0) return 'inexistent'
+    return 'neutral'
+  }
+
+  const getBackgroundByStatus = (status: LetterStatusType): string =>
+    ({
+      neutral: 'backdrop-brightness-90',
+      correct: 'bg-green-500',
+      existent: 'bg-yellow-600',
+      inexistent: 'bg-slate-800',
+    }[status])
+
+  const bg = getBackgroundByStatus(getLetterStatus())
 
   return (
     <button
