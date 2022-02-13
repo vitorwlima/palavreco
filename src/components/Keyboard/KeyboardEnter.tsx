@@ -102,6 +102,7 @@ const KeyboardEnter = () => {
     if (lettersUsed === 30) {
       setIsGameOver(true)
       setNewGameStatus('Você perdeu!')
+      console.log('A palavra certa era ', gameWord)
     }
   }, [correctLetters, lettersUsed])
 
