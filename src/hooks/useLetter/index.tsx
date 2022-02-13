@@ -9,7 +9,7 @@ import {
 
 import { usableWords } from 'src/constants'
 import { getRandomIntegerFrom } from 'src/utils'
-import { LetterType } from 'src/types'
+import { LetterType, GameStatusType } from 'src/types'
 
 type LetterContextType = {
   letters: LetterType[]
@@ -19,6 +19,8 @@ type LetterContextType = {
   lastFinishedRow: number
   setLastFinishedRow: Dispatch<SetStateAction<number>>
   gameWord: string
+  gameStatus: GameStatusType
+  setNewGameStatus: (text: string) => void
 }
 
 type LetterContextProviderProps = {
@@ -40,6 +42,15 @@ const LetterContextProvider = ({ children }: LetterContextProviderProps) => {
   const [letters, setLetters] = useState<LetterType[]>([])
   const [missingLetters, setMissingLetters] = useState(initialMissingLetters)
   const [lastFinishedRow, setLastFinishedRow] = useState(0)
+  const [gameStatus, setGameStatus] = useState<GameStatusType>({
+    text: 'inicial',
+    show: false,
+  })
+
+  const setNewGameStatus = (text: string) => {
+    setGameStatus({ text, show: true })
+    setTimeout(() => setGameStatus({ text, show: false }), 5000)
+  }
 
   return (
     <LetterContext.Provider
@@ -51,6 +62,8 @@ const LetterContextProvider = ({ children }: LetterContextProviderProps) => {
         lastFinishedRow,
         setLastFinishedRow,
         gameWord: 'falta',
+        gameStatus,
+        setNewGameStatus,
       }}
     >
       {children}

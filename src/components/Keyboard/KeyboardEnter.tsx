@@ -1,9 +1,16 @@
 import { useLetter } from 'src/hooks/useLetter'
 import { LetterType, LetterStatusType } from 'src/types'
+import { allWords } from '../../constants'
 
 const KeyboardEnter = () => {
-  const { gameWord, letters, setLetters, lastFinishedRow, setLastFinishedRow } =
-    useLetter()
+  const {
+    gameWord,
+    letters,
+    setLetters,
+    lastFinishedRow,
+    setLastFinishedRow,
+    setNewGameStatus,
+  } = useLetter()
 
   const getStatusByLetter = (letter: LetterType): LetterStatusType => {
     if (gameWord[letter.position] === letter.value) {
@@ -54,6 +61,17 @@ const KeyboardEnter = () => {
   }
 
   const handleFinishCurrentRow = () => {
+    if (
+      !allWords.includes(
+        letters
+          .slice(lastFinishedRow * 5, (lastFinishedRow + 1) * 5)
+          .map((item) => item.value)
+          .join('')
+      )
+    ) {
+      return setNewGameStatus('Palavra inexistente')
+    }
+
     setLastFinishedRow((previousFinishedRow) => previousFinishedRow + 1)
     setLetters((previousLetters) => [
       ...previousLetters.slice(0, lastFinishedRow * 5),

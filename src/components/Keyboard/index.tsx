@@ -4,12 +4,12 @@ import KeyboardLetter from './KeyboardLetter'
 
 const Keyboard = () => {
   return (
-    <div className="flex flex-col items-center gap-3">
-      <div className="flex gap-3">
+    <div className="flex flex-col items-center gap-2">
+      <div className="flex gap-2">
         <KeyboardDelete />
         <KeyboardEnter />
       </div>
-      <div className="flex gap-3">
+      <div className="flex gap-2">
         <KeyboardLetter letter="q" />
         <KeyboardLetter letter="w" />
         <KeyboardLetter letter="e" />
@@ -21,7 +21,7 @@ const Keyboard = () => {
         <KeyboardLetter letter="o" />
         <KeyboardLetter letter="p" />
       </div>
-      <div className="flex gap-3">
+      <div className="flex gap-2">
         <KeyboardLetter letter="a" />
         <KeyboardLetter letter="s" />
         <KeyboardLetter letter="d" />
@@ -32,7 +32,7 @@ const Keyboard = () => {
         <KeyboardLetter letter="k" />
         <KeyboardLetter letter="l" />
       </div>
-      <div className="flex gap-3">
+      <div className="flex gap-2">
         <KeyboardLetter letter="z" />
         <KeyboardLetter letter="x" />
         <KeyboardLetter letter="c" />
