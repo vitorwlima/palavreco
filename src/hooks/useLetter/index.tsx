@@ -64,7 +64,7 @@ const LetterContextProvider = ({ children }: LetterContextProviderProps) => {
         setMissingLetters,
         lastFinishedRow,
         setLastFinishedRow,
-        gameWord: 'falta',
+        gameWord,
         gameStatus,
         setNewGameStatus,
         isGameOver,

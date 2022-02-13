@@ -94,12 +94,12 @@ const KeyboardEnter = () => {
   }
 
   useEffect(() => {
-    if (correctLetters === 10) {
+    if (correctLetters === 5) {
       setIsGameOver(true)
       setNewGameStatus('Parabéns!')
     }
 
-    if (lettersUsed === 60) {
+    if (lettersUsed === 30) {
       setIsGameOver(true)
       setNewGameStatus('Você perdeu!')
     }
