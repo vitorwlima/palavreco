@@ -15,7 +15,10 @@ const KeyboardEnter = () => {
     }
 
     const userWordLetterOccurrences = letters.filter(
-      (currentLetter) => currentLetter.value === letter.value
+      (currentLetter, index) =>
+        index > lastFinishedRow * 5 &&
+        index < (lastFinishedRow + 1) * 5 &&
+        currentLetter.value === letter.value
     )
     const gameWordLetterOccurrences = gameWord
       .split('')
@@ -52,12 +55,15 @@ const KeyboardEnter = () => {
 
   const handleFinishCurrentRow = () => {
     setLastFinishedRow((previousFinishedRow) => previousFinishedRow + 1)
-    setLetters((previousLetters) =>
-      previousLetters.map((letter) => ({
-        ...letter,
-        status: getStatusByLetter(letter),
-      }))
-    )
+    setLetters((previousLetters) => [
+      ...previousLetters.slice(0, lastFinishedRow * 5),
+      ...previousLetters
+        .slice(lastFinishedRow * 5, (lastFinishedRow + 1) * 5)
+        .map((letter) => ({
+          ...letter,
+          status: getStatusByLetter(letter),
+        })),
+    ])
   }
 
   const allowed =
